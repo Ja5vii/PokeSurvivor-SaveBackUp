@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    :root {
+      --bg: #12141d;
+      --card: #1c1f2e;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --success: #10b981;
+      --success-hover: #059669;
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --danger: #ef4444;
+    }
+    body {
+      width: 270px;
+      margin: 0;
+      padding: 16px;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #2d3246;
+    }
+    .header img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+    }
+    .header h1 {
+      font-size: 15px;
+      margin: 0;
+      font-weight: 600;
+    }
+    .header span {
+      font-size: 11px;
+      color: var(--muted);
+      display: block;
+    }
+    .btn {
+      width: 100%;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-export { background: var(--success); color: #fff; }
+    .btn-export:hover { background: var(--success-hover); }
+    .btn-import { background: var(--primary); color: #fff; }
+    .btn-import:hover { background: var(--primary-hover); }
+    #status {
+      font-size: 12px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      background: var(--card);
+      color: var(--muted);
+      text-align: center;
+      min-height: 18px;
+      line-height: 1.4;
+    }
+    .status-ok { color: #34d399 !important; border: 1px solid #065f46; }
+    .status-err { color: #f87171 !important; border: 1px solid #7f1d1d; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="icon.png" alt="Icon">
+    <div>
+      <h1>PokéSurvivor Save</h1>
+      <span>Backup Manager v2.0</span>
+    </div>
+  </div>
+
+  <button id="exportBtn" class="btn btn-export">
+    <span>💾</span> Exportar Copia (.json)
+  </button>
+  
+  <button id="importBtn" class="btn btn-import">
+    <span>📂</span> Restaurar Copia (.json)
+  </button>
+
+  <input type="file" id="fileInput" accept=".json" style="display: none;">
+  <div id="status">Listo para gestionar tu partida.</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
