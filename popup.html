@@ -4,100 +4,122 @@
   <meta charset="UTF-8">
   <style>
     :root {
-      --bg: #12141d;
-      --card: #1c1f2e;
+      --bg: #0f1117;
+      --surface: #181b24;
+      --border: #282d3d;
       --primary: #3b82f6;
       --primary-hover: #2563eb;
       --success: #10b981;
       --success-hover: #059669;
+      --warning: #f59e0b;
+      --danger: #ef4444;
       --text: #f3f4f6;
       --muted: #9ca3af;
-      --danger: #ef4444;
     }
     body {
-      width: 270px;
+      width: 290px;
       margin: 0;
       padding: 16px;
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background-color: var(--bg);
+      background: var(--bg);
       color: var(--text);
     }
     .header {
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: space-between;
+      padding-bottom: 12px;
       margin-bottom: 14px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #2d3246;
+      border-bottom: 1px solid var(--border);
     }
-    .header img {
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-    }
-    .header h1 {
-      font-size: 15px;
-      margin: 0;
+    .title-group { display: flex; align-items: center; gap: 10px; }
+    .title-group img { width: 30px; height: 30px; border-radius: 6px; }
+    .title-group h1 { font-size: 14px; margin: 0; font-weight: 700; }
+    .badge {
+      font-size: 10px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
       font-weight: 600;
     }
-    .header span {
+    .vault-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 12px;
       font-size: 11px;
-      color: var(--muted);
-      display: block;
     }
+    .vault-card strong { display: block; color: var(--text); margin-bottom: 3px; }
+    .vault-card span { color: var(--muted); }
     .btn {
       width: 100%;
-      padding: 10px 12px;
-      margin-bottom: 10px;
+      padding: 10px;
+      margin-bottom: 8px;
       border: none;
       border-radius: 8px;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      transition: background 0.2s, transform 0.1s;
+      transition: all 0.15s ease;
     }
     .btn:active { transform: scale(0.98); }
     .btn-export { background: var(--success); color: #fff; }
     .btn-export:hover { background: var(--success-hover); }
     .btn-import { background: var(--primary); color: #fff; }
     .btn-import:hover { background: var(--primary-hover); }
+    .btn-vault {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-vault:hover { background: #222634; }
+    .btn-confirm { background: var(--warning); color: #000; }
     #status {
-      font-size: 12px;
+      margin-top: 10px;
+      font-size: 11.5px;
       padding: 8px 10px;
       border-radius: 6px;
-      background: var(--card);
+      background: var(--surface);
+      border: 1px solid var(--border);
       color: var(--muted);
       text-align: center;
-      min-height: 18px;
       line-height: 1.4;
     }
-    .status-ok { color: #34d399 !important; border: 1px solid #065f46; }
-    .status-err { color: #f87171 !important; border: 1px solid #7f1d1d; }
+    .ok { color: #34d399 !important; border-color: #065f46 !important; }
+    .err { color: #f87171 !important; border-color: #7f1d1d !important; }
+    .warn { color: #fbbf24 !important; border-color: #78350f !important; }
   </style>
 </head>
 <body>
   <div class="header">
-    <img src="icon.png" alt="Icon">
-    <div>
-      <h1>PokéSurvivor Save</h1>
-      <span>Backup Manager v2.0</span>
+    <div class="title-group">
+      <img src="icon.png" alt="Icon">
+      <div>
+        <h1>PokéSurvivor Vault</h1>
+        <span style="font-size: 11px; color: var(--muted);">SHA-256 Protected</span>
+      </div>
     </div>
+    <span class="badge">v3.0 PRO</span>
   </div>
 
-  <button id="exportBtn" class="btn btn-export">
-    <span>💾</span> Exportar Copia (.json)
-  </button>
-  
-  <button id="importBtn" class="btn btn-import">
-    <span>📂</span> Restaurar Copia (.json)
-  </button>
+  <div class="vault-card">
+    <strong>🛡️ Bóveda Interna de Emergencia</strong>
+    <span id="vaultInfo">Comprobando copias internas...</span>
+  </div>
+
+  <button id="exportBtn" class="btn btn-export">💾 Exportar Archivo + Bóveda</button>
+  <button id="importBtn" class="btn btn-import">📂 Restaurar desde Archivo (.json)</button>
+  <button id="restoreVaultBtn" class="btn btn-vault" style="display: none;">⚡ Restaurar Última Bóveda</button>
 
   <input type="file" id="fileInput" accept=".json" style="display: none;">
-  <div id="status">Listo para gestionar tu partida.</div>
+  <div id="status">Listo. Abre el juego para operar.</div>
 
   <script src="popup.js"></script>
 </body>

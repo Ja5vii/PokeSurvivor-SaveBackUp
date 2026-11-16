@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "PokéSurvivor Save Manager Pro",
-  "version": "2.0",
-  "description": "Gestor profesional de copias de seguridad (LocalStorage + IndexedDB) para PokéSurvivor.",
-  "permissions": ["activeTab", "scripting"],
+  "name": "PokéSurvivor Vault Pro",
+  "version": "3.0",
+  "description": "Sistema profesional de respaldo cifrado SHA-256 y bóveda local para PokéSurvivor.",
+  "permissions": ["activeTab", "scripting", "storage"],
   "icons": {
     "16": "icon.png",
     "48": "icon.png",
